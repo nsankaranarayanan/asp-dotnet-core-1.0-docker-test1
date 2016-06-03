@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <!-- These properties coordinate the targets used for calling docker commands -->
+  <!--
   <PropertyGroup>
     <DockerBuildDependsOn>
       SetDockerProps;
@@ -19,7 +20,8 @@
       CoreDockerBeforeRebuild;
     </DockerBeforeRebuildDependsOn>
   </PropertyGroup>
-
+  -->
+  
   <!-- This target dynamically sets the DockerBuild property based on the ActiveDebugProfile so that docker commands will only be invoked when targeting docker -->
   <Target Name="SetDockerProps">
     <PropertyGroup>

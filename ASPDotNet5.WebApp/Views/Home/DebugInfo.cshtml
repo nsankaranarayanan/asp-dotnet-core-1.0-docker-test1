@@ -1,0 +1,27 @@
+﻿@using ASPDotNet5.WebApp.Models;
+@model DebugInfoModel
+
+@{
+	DebugInfoModel m = this.Model;
+
+	this.ViewData["Title"] = "Debug Information";
+}
+<h2>@this.ViewData["Title"]</h2>
+
+<table class="table-striped">
+	<thead>
+		<tr>
+			<td>Key</td>
+			<td>Value</td>
+		</tr>
+	</thead>
+	<tbody>
+@foreach (string key in m.Properties.Keys)
+{
+	<tr>
+		<td>@key</td>
+		<td>@m.Properties[ key ]</td>
+	</tr>
+}
+	</tbody>
+</table>

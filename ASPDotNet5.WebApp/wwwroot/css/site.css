@@ -29,3 +29,22 @@ textarea {
     display: none
   }
 }
+
+.carousel-indicators li {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 10px;
+    text-indent: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 25%;
+    background-color: black;
+    box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);    
+}
+.carousel-indicators .active {
+    width: 16px;
+    height: 16px;
+    margin: 10px;
+    background-color: yellow;
+}

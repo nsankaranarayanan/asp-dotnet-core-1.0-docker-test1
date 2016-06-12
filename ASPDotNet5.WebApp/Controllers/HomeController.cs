@@ -50,7 +50,7 @@ namespace ASPDotNet5.WebApp.Controllers
 			model.Properties.Add("HttpContext.Connection.RemotePort", ((Func<string>)(() => { try { return (this.HttpContext.Connection.RemotePort.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
 			model.Properties.Add("HttpContext.User.Identity.Name", ((Func<string>)(() => { try { return (this.HttpContext.User.Identity.Name); } catch (Exception ex) { return (ex.Message); } }))());
 			model.Properties.Add("HttpContext.User.Identity.AuthenticationType", ((Func<string>)(() => { try { return (this.HttpContext.User.Identity.AuthenticationType); } catch (Exception ex) { return (ex.Message); } }))());
-			
+
 			try
 			{
 				foreach (var cookie in this.Request.Cookies)
@@ -107,6 +107,8 @@ namespace ASPDotNet5.WebApp.Controllers
 				
 			}
 
+			model.Properties.Add("Environment.MachineName", ((Func<string>)(() => { try { return (Environment.MachineName); } catch (Exception ex) { return (ex.Message); } }))());
+			model.Properties.Add("Environment.ProcessorCount", ((Func<string>)(() => { try { return (Environment.ProcessorCount.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
 			try
 			{
 				foreach (var key in Environment.GetEnvironmentVariables().Keys)

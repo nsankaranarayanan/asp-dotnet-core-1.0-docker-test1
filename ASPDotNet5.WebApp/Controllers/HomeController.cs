@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ASPDotNet5.WebApp.Models;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace ASPDotNet5.WebApp.Controllers
 {
@@ -43,6 +44,13 @@ namespace ASPDotNet5.WebApp.Controllers
 			model.Properties.Add("Request.Protocol", ((Func<string>)(() => { try { return (this.Request.Protocol); } catch (Exception ex) { return (ex.Message); } }))());
 			model.Properties.Add("Request.QueryString", ((Func<string>)(() => { try { return (this.Request.QueryString.Value); } catch (Exception ex) { return (ex.Message); } }))());
 			model.Properties.Add("Request.Scheme", ((Func<string>)(() => { try { return (this.Request.Scheme); } catch (Exception ex) { return (ex.Message); } }))());
+			model.Properties.Add("HttpContext.Connection.LocalIpAddress", ((Func<string>)(() => { try { return (this.HttpContext.Connection.LocalIpAddress.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
+			model.Properties.Add("HttpContext.Connection.LocalPort", ((Func<string>)(() => { try { return (this.HttpContext.Connection.LocalPort.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
+			model.Properties.Add("HttpContext.Connection.RemoteIpAddress", ((Func<string>)(() => { try { return (this.HttpContext.Connection.RemoteIpAddress.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
+			model.Properties.Add("HttpContext.Connection.RemotePort", ((Func<string>)(() => { try { return (this.HttpContext.Connection.RemotePort.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
+			model.Properties.Add("HttpContext.User.Identity.Name", ((Func<string>)(() => { try { return (this.HttpContext.User.Identity.Name); } catch (Exception ex) { return (ex.Message); } }))());
+			model.Properties.Add("HttpContext.User.Identity.AuthenticationType", ((Func<string>)(() => { try { return (this.HttpContext.User.Identity.AuthenticationType); } catch (Exception ex) { return (ex.Message); } }))());
+			
 			try
 			{
 				foreach (var cookie in this.Request.Cookies)
@@ -96,15 +104,21 @@ namespace ASPDotNet5.WebApp.Controllers
 			}
 			catch (Exception tex)
 			{
+				
+			}
+
+			try
+			{
+				foreach (var key in Environment.GetEnvironmentVariables().Keys)
+				{
+					model.Properties.Add("Environment." + key, ((Func<string>)(() => { try { return (Environment.GetEnvironmentVariable(key.ToString())); } catch (Exception ex) { return (ex.Message); } }))());
+				}
+			}
+			catch (Exception tex)
+			{
 
 			}
-			model.Properties.Add("HttpContext.Connection.LocalIpAddress", ((Func<string>)(() => { try { return (this.HttpContext.Connection.LocalIpAddress.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
-			model.Properties.Add("HttpContext.Connection.LocalPort", ((Func<string>)(() => { try { return (this.HttpContext.Connection.LocalPort.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
-			model.Properties.Add("HttpContext.Connection.RemoteIpAddress", ((Func<string>)(() => { try { return (this.HttpContext.Connection.RemoteIpAddress.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
-			model.Properties.Add("HttpContext.Connection.RemotePort", ((Func<string>)(() => { try { return (this.HttpContext.Connection.RemotePort.ToString()); } catch (Exception ex) { return (ex.Message); } }))());
-			model.Properties.Add("HttpContext.User.Identity.Name", ((Func<string>)(() => { try { return (this.HttpContext.User.Identity.Name); } catch (Exception ex) { return (ex.Message); } }))());
-			model.Properties.Add("HttpContext.User.Identity.AuthenticationType", ((Func<string>)(() => { try { return (this.HttpContext.User.Identity.AuthenticationType); } catch (Exception ex) { return (ex.Message); } }))());
-			//model.Properties.Add("AAAAA", ((Func<string>)(() => { try { return ("AAAAA"); } catch (Exception ex) { return (ex.Message); } }))());
+
 			//model.Properties.Add("AAAAA", ((Func<string>)(() => { try { return ("AAAAA"); } catch (Exception ex) { return (ex.Message); } }))());
 			//model.Properties.Add("AAAAA", ((Func<string>)(() => { try { return ("AAAAA"); } catch (Exception ex) { return (ex.Message); } }))());
 			//model.Properties.Add("AAAAA", ((Func<string>)(() => { try { return ("AAAAA"); } catch (Exception ex) { return (ex.Message); } }))());
